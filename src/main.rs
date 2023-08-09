@@ -69,6 +69,6 @@ fn main() {
 		}
 
 		// wait for a second before scanning the directory again
-		std::thread::sleep(std::time::Duration::from_secs(1));
+		std::thread::sleep(std::time::Duration::from_millis(100));
 	}
 }
