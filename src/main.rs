@@ -29,7 +29,7 @@ fn main() {
 		if let Ok(entries) = fs::read_dir(dir) {
 			let mut newest_entry: Option<(String, SystemTime)> = None;
 
-			// Find the newest file based on modification timestamps
+			// find the newest file based on modification timestamps
 			for entry in entries {
 				if let Ok(entry) = entry {
 					if let Ok(metadata) = entry.metadata() {
@@ -55,7 +55,7 @@ fn main() {
 						if entry_name != newest_name {
 							let entry_path = dir.join(&entry_name);
 							if entry_path.is_file() {
-								// Attempt to delete the file
+								// attempt to delete the file
 								if fs::remove_file(entry_path.clone()).is_ok() {
 									println!("Deleted file \"{}\".", entry_name);
 								} else {
