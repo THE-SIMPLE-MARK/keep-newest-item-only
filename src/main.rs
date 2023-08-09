@@ -19,7 +19,7 @@ fn main() {
 
 	// check if the provided path is a valid directory
 	if !dir.is_dir() {
-		eprintln!("Error: {} is not a valid directory.", dir_path);
+		eprintln!("Error: \"{}\" is not a valid directory.", dir_path);
 		return;
 	}
 
