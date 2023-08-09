@@ -4,28 +4,28 @@ use std::path::Path;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 fn main() {
-	// Collect command line arguments
+	// collect command line arguments
 	let args: Vec<String> = env::args().collect();
 
-	// Check if the correct number of arguments is provided
+	// check if the correct number of arguments is provided
 	if args.len() != 2 {
 		eprintln!("Usage: {} <directory_path>", args[0]);
 		return;
 	}
 
-	// Get the directory path from the command line arguments
+	// get the directory path from the command line arguments
 	let dir_path = &args[1];
 	let dir = Path::new(dir_path);
 
-	// Check if the provided path is a valid directory
+	// check if the provided path is a valid directory
 	if !dir.is_dir() {
 		eprintln!("Error: {} is not a valid directory.", dir_path);
 		return;
 	}
 
-	// Main loop: continuously scan the directory and perform operations
+	// continuously scan the directory and perform operations
 	loop {
-		// Read directory entries
+		// read directory entries
 		if let Ok(entries) = fs::read_dir(dir) {
 			let mut newest_entry: Option<(String, SystemTime)> = None;
 
@@ -47,7 +47,7 @@ fn main() {
 				}
 			}
 
-			// If a newest file is found, delete other files in the directory
+			// if a newest file is found, delete other files in the directory
 			if let Some((newest_name, _)) = newest_entry {
 				for entry in fs::read_dir(dir).unwrap() {
 					if let Ok(entry) = entry {
@@ -68,7 +68,7 @@ fn main() {
 			}
 		}
 
-		// Wait for a second before scanning the directory again
+		// wait for a second before scanning the directory again
 		std::thread::sleep(std::time::Duration::from_secs(1));
 	}
 }
